@@ -6,7 +6,6 @@ struct one_owner{
     uintptr_t start;
     size_t alloced;
 };
-
 one_ownerptr* one_owner_create(size_t size) {
     one_ownerptr* new = malloc(sizeof(struct one_owner));
     if (!new) return NULL;
