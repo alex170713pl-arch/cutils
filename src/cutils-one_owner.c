@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <stdlib.h>
-#include "../include/one_owner.h"
+#include "../include/cutils-one_owner.h"
 struct one_owner{
     void* ptr;
     uintptr_t start;
@@ -33,7 +33,7 @@ void* one_owner_get(one_ownerptr* p) {
     if (!one_owner_isvalid(p)) return NULL;
     return p->ptr;
 }
-_Bool one_owner_isvalid(one_ownerptr* p) {
+int one_owner_isvalid(one_ownerptr* p) {
     if (!p ) return 0;
     if ((uintptr_t)p->ptr != p->start) return 0;
     return 1;

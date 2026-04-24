@@ -1,4 +1,4 @@
-#include "../include/Str.h"
+#include "../include/cutils-str.h"
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -97,7 +97,7 @@ void STRING_clear(string_t* Targ) {
     Targ->len = 0;
     Targ->max = 10;
 }
-void STRING_free(string_t**s) {
+void STRING_free(string_t** s) {
     if(!(*s) || !(*s)->Str) {return;}
     free((*s)->Str);
     (*s)->Str = NULL;

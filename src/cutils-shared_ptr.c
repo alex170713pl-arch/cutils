@@ -1,4 +1,4 @@
-#include "../include/shared_ptr.h"
+#include "../include/cutils-shared_ptr.h"
 #include <stdlib.h>
 struct shared {
     void* ptr;
@@ -31,7 +31,7 @@ size_t shared_getrefs(shared_ptr* targ){
     if (!targ || !targ->ptr) return 0;
     return targ->refs;
 }
-_Bool shared_isvalid(shared_ptr* p) {
+int shared_isvalid(shared_ptr* p) {
     return  p && p->ptr;
 }
 void shared_realloc(shared_ptr* p,size_t __newsize) {
@@ -45,19 +45,14 @@ void shared_free(shared_ptr** targ) {
     if (!targ || !*targ) return;
     
     shared_ptr* p = *targ;
-    if (!p->ptr) return;
-    
+    p->refs--;
     if (p->refs > 0) {
-        p->refs--;
-        p->ptr = NULL;
+        *targ = NULL;
         return;
     }
-    
-    if (p->refs == 0) {
-        free(p->ptr);
-        free(p);
-        *targ = NULL; 
-    }
+    free(p->ptr);
+    free(p);
+    *targ = NULL;
 }
 weak_ptr* weak_new(shared_ptr* targ){
     weak_ptr* new = calloc(1,sizeof(weak_ptr));

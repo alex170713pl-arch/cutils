@@ -14,11 +14,12 @@
         }while(0)
     #endif
     size_t shared_getrefs(shared_ptr* targ);
-    _Bool shared_isvalid(shared_ptr* p);
+    int shared_isvalid(shared_ptr* p);
     void shared_free(shared_ptr** targ);
 
     weak_ptr* weak_new(shared_ptr* targ);
     void weak_change(weak_ptr* targ,shared_ptr* new);
     shared_ptr* weak_lock(weak_ptr* __ptr);
     void weak_free(weak_ptr** __ptr);
+    
 #endif 
