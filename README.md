@@ -1,9 +1,11 @@
 # Aurora : light of ANSI C
+ **size** : 27KB (.a) , 31KB (.so) | **ANSI C**
 ## modules
+
 - rtti
 - smartptr (one_owner and shared_ptr)
 - str
-
+- signal
 ### API
 - rtti
 ```c
@@ -111,6 +113,53 @@ size_t STRING_getln(string_t* Targ);
 //flags for function STRING_rewriteChar
 #define __STRING_flag_all 1
 #define __STRING_flag_default 0
+```
+- signal
+``` c
+    // create new signal
+    signal_t* signal_new(void);
+    // make chain with signals (WARN : don't make loops( else loops -> oops))
+    void signal_chain(signal_t* target,signal_t* node);
+    // connect handle to signal
+    void signal_connect(signal_t* s,handle_t* fn);
+    // emit signal with message ( message mustn't be NULL )
+    void signal_emit(signal_t* s, const char* message, void** data, void* ret)
+    // free signal ( freeing all handles)
+    void signal_free(signal_t** s);
+    // shared emit (to all signals)
+    void signal_shared_emit(const char* message,void** d,void* r);
+    // create new handle
+    handle_t* handle_new(worker_sig fn);
+    // set trigger message
+    void handle_runOn(handle_t* h,const char* targs);
+    // get count of runs of handle
+    size_t handle_runs(handle_t* h);
+    // set Max Runs of handle (if runs == max then handle not starts on signal)
+    void handle_setMaxRuns(handle_t* h, size_t runs);
+    // free handle ( and unregister from signal)
+    void handle_free(handle_t** h);
+    // get count of handles of signal
+    size_t signal_handles(signal_t* s);
+    // get count of signals
+    size_t signal_total_signals();
+    // create new group of signals
+    signal_group_t* signal_new_group();
+    // emit to all signals in group with message
+    void signal_group_emit(signal_group_t* g,const char* msg,void** data,void* ret);
+    // set trigger message of signal
+    void signal_set_trigger_message(signal_t* s, const char* msg);
+    // connect signal to group
+    void signal_connect_to_group(signal_group_t * g,signal_t* s);
+    // disconnect signal from group
+    void signal_disconnect_from_group(signal_group_t* g,signal_t* s);
+    // free signal group (WARN : signals not deleting)
+    void signal_group_free(signal_group_t** g);
+    // DEBUG FUNCTIONS
+    // print info about handle
+    void handle_dump(handle_t* h);
+    // print info about signal
+    void signal_dump(signal_t* s);
+
 ```
 #### Examples
     search directory (folder) exams

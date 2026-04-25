@@ -153,13 +153,10 @@ size_t handle_runs(handle_t* h) {
 
 void signal_chain(signal_t* target, signal_t* node) {
     signal_t* last;
-    
     if (!target || !node) return;
-    
     last = target;
-    while (last->chain_next_node) {
+    while (last->chain_next_node)
         last = last->chain_next_node;
-    }
     last->chain_next_node = node;
 }
 
@@ -349,10 +346,9 @@ void signal_disconnect_from_group(signal_group_t* g, signal_t* s) {
         }
     }
 }
-
 void signal_group_free(signal_group_t** g) {
     if (!g || !*g) return;
-    
+
     if ((*g)->signals) {
         free((*g)->signals);
     }

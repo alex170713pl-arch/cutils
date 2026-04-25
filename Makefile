@@ -5,45 +5,46 @@ MODE ?= STATIC
 INCLUDE = include
 PREF = /usr/local
 
-OBJS = cutils-one_owner.o cutils-rtti.o cutils-shared_ptr.o cutils-str.o
+OBJS = one_owner.o rtti.o shared_ptr.o str.o signal.o
 
 ifeq ($(MODE),SHARED)
     CFLAGS += -fPIC
 endif
 
-all: libcutils.a
+all: libAurora.a
 ifeq ($(MODE),SHARED)
-all: libcutils.so
+all: libAurora.so
 endif
 
-libcutils.a: $(OBJS)
+libAurora.a: $(OBJS)
 	ar rcs $@ $(OBJS)
 
-libcutils.so: $(OBJS)
+libAurora.so: $(OBJS)
 	$(CC) -shared $(OBJS) -o $@
-
-cutils-one_owner.o: $(SRC)cutils-one_owner.c
+signal.o : $(SRC)signal.c
+	$(CC) $(CFLAGS) -o $@ $<
+one_owner.o: $(SRC)one_owner.c
 	$(CC) $(CFLAGS) -o $@ $<
 
-cutils-rtti.o: $(SRC)cutils-rtti.c
+rtti.o: $(SRC)rtti.c
 	$(CC) $(CFLAGS) -o $@ $<
 
-cutils-shared_ptr.o: $(SRC)cutils-shared_ptr.c
+shared_ptr.o: $(SRC)shared_ptr.c
 	$(CC) $(CFLAGS) -o $@ $<
 
-cutils-str.o: $(SRC)cutils-str.c
+str.o: $(SRC)str.c
 	$(CC) $(CFLAGS) -o $@ $<
 
-install: libcutils.so
+install: libAurora.so
 	mkdir -p $(PREF)/lib
-	mkdir -p $(PREF)/include/cutils-lib
-	cp libcutils.so $(PREF)/lib/
-	cp $(INCLUDE)/*.h $(PREF)/include/cutils-lib/
+	mkdir -p $(PREF)/include/Aurora
+	cp libAurora.so $(PREF)/lib/
+	cp $(INCLUDE)/*.h $(PREF)/include/Aurora/
 
 uninstall:
-	rm -f $(PREF)/lib/libcutils.a
-	rm -f $(PREF)/lib/libcutils.so
-	rm -rf $(PREF)/include/cutils-lib
+	rm -f $(PREF)/lib/libAurora.a
+	rm -f $(PREF)/lib/libAurora.so
+	rm -rf $(PREF)/include/Aurora
 	
 clean:
-	rm -f $(OBJS) libcutils.a libcutils.so
+	rm -f $(OBJS) libAurora.a libAurora.so
