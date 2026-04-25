@@ -375,3 +375,13 @@ void rtti_free(rtti_t** r) {
     (*r)->mag_num = -1;
     *r = NULL; 
 }
+size_t rtti_sizeof(const char* name,rtti_t* obj) {
+    if ((name && obj) || (!name && !obj)) return 0;
+    if (name && !obj) {
+        int i = __find_str(name);
+        if (i == -1) return 0;
+        return  global.sizes[i];
+    } else {
+        return global.sizes[obj->mag_num];
+    }
+}

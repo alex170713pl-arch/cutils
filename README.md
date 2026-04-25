@@ -21,7 +21,7 @@
  void rtti_register(const char* name, size_t size);
  // unregister type in rtti
  void rtti_unregister(const char* name);
- // return type id (by name and by obj)
+ // return type id (by name or by obj)
  int  rtti_typeid(const char* name, const rtti_t* obj); // NULL,obj or "your_type",NULL
  // return type in object
  const char* rtti_typeof(const rtti_t* obj);
@@ -33,6 +33,8 @@
  const void* rtti_ptr(const rtti_t* r);
  // free rtti_t
  void rtti_free(rtti_t** r);
+ // get size of type (by name or by obj)
+ size_t rtti_sizeof(const char* name,rtti_t* obj); // NULL,obj or "your_type",NULL
 ```
 - smartptr
 ``` c

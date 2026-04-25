@@ -20,7 +20,7 @@ const char* rtti_typeof(const rtti_t* obj);
 void rtti_set(rtti_t* r, int type, void* val);
 void rtti_cast(rtti_t* r, int type_id);
 const void* rtti_ptr(const rtti_t* r);
-
+size_t rtti_sizeof(const char* name,rtti_t* obj);
 void rtti_free(rtti_t** r);
 
 #endif
