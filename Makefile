@@ -34,7 +34,6 @@ shared_ptr.o: $(SRC)shared_ptr.c
 
 str.o: $(SRC)str.c
 	$(CC) $(CFLAGS) -o $@ $<
-
 install: libAurora.so
 	mkdir -p $(PREF)/lib
 	mkdir -p $(PREF)/include/Aurora
