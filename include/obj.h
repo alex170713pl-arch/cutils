@@ -12,8 +12,8 @@
         ACCESS_PROTECTED
     } access_level;
     typedef void(*obj_met)(obj_t * self,void* sec,void** args,void* data);
-    typedef void(*obj_constructor)(obj_t * self,void** args);
-    typedef void(*obj_destructor)(obj_t* self);
+    typedef void(*obj_constructor)(obj_t * self,void* sec,void** args);
+    typedef void(*obj_destructor)(obj_t* self,void* sec);
     /*====== CLASS API =====*/
 
     obj_class_t* obj_new_class(const char * name,
