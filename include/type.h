@@ -1,5 +1,5 @@
-#ifndef CUTILS_TYPE_H
-    #define CUTILS_TYPE_H
+#ifndef AURORA_TYPE_H
+    #define AURORA_TYPE_H
 
     #define TYPE_INT 1
     #define TYPE_SHORT 2
