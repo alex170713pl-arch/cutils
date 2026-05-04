@@ -11,7 +11,7 @@
     void gc_table(const char* table_name);
     void gc_setTable(const char* table_name);
     void gc_resetTable(int free_old);
-    void* gc_allocate(size_t size,int flags);
+    void* gc_allocate(size_t size);
     void gc_unselect(void* p,...);
     void gc_export(void* p,const char* exportObjName);
     void* gc_import(const char* importObjName);
@@ -25,4 +25,4 @@
 
     void gc_status();
     void gc_end(void);
-#endif
+#endif@
