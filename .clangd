@@ -1,6 +1,6 @@
 CompileFlags:
   Add: [-xc, -ansi]
-  Remove: [-xc++, -std=gnu++17, -std=c++17]
+  Remove: [-xc++, -std=gnu17, -std=c++17]
 
 Diagnostics:
   MissingIncludes: false

@@ -52,7 +52,7 @@ GCTables tables;
 GCTable* curr = NULL;
 GCTable* gtable = NULL;
 GCTable* last;
-char* __strdup(const char* input) {
+static char* __strdup(const char* input) {
     if (!input) return NULL;
     size_t i = strlen(input) + 1;
     char* news = malloc(i);
