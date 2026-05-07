@@ -1,11 +1,11 @@
 SRC = src/
 CC ?= gcc
-CFLAGS ?= -c -std=c89 -Os
+CFLAGS ?= -c -ansi -Os
 MODE ?= STATIC
 INCLUDE = include
 PREF = /usr/local
 
-OBJS = one_owner.o rtti.o shared_ptr.o str.o signal.o gc.o
+OBJS = one_owner.o rtti.o shared_ptr.o str.o signal.o gc.o dict.o
 
 ifeq ($(MODE),SHARED)
     CFLAGS += -fPIC
@@ -37,6 +37,9 @@ str.o: $(SRC)str.c
 gc.o : $(SRC)gc.c
 	$(CC) $(CFLAGS) -o $@ $<
 	
+dict.o : $(SRC)dict.c
+	$(CC) $(CFLAGS) -o $@ $<
+
 install: libAurora.so
 	mkdir -p $(PREF)/lib
 	mkdir -p $(PREF)/include/Aurora
